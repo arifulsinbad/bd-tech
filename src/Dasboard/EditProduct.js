@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import postProduct from "../Redux/Thunk/postProduct";
+import updateProduct from "../Redux/Thunk/updateProduct";
 
 
-const AddProduct = () => {
+const EditProduct = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch()
-
+const updateId = useSelector((state)=> state.filter.updateId)
+// console.log(updateId._id)
   const submit = (data) => {
     const product = {
       date: data.date,
@@ -24,9 +25,9 @@ const AddProduct = () => {
       spec: [],
     };
    
-    
+    dispatch(updateProduct(updateId._id, product))
    
-    dispatch(postProduct(product))
+    // dispatch(postProduct(product))
    
     console.log(product);
   };
@@ -162,4 +163,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;
